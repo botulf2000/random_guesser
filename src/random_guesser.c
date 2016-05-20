@@ -4,6 +4,8 @@ static Window *window;
 static TextLayer *text_layer;
 static TextLayer *last_nr_layer;
 static TextLayer *points_layer;
+static BitmapLayer *background_layer;
+static GBitmap *bg_image;
 static GFont font14, font24;
 
 static int last;
@@ -35,7 +37,9 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+  static char txt[20];
   int new_nr=get_next();
+  
   if(new_nr>=last)
   {
     points++;
@@ -43,7 +47,9 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     show_points();
   }
   else{
-    text_layer_set_text(text_layer, "Sorry");
+    snprintf(txt,20,"Sorry, it was %d", new_nr);  
+
+    text_layer_set_text(text_layer, txt);
     show_points();
     points=0;
   }
@@ -53,7 +59,9 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+  static char txt[20];
   int new_nr=get_next();
+  
   if(new_nr<=last)
   {
     points++;
@@ -61,8 +69,10 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
     show_points();
   }
   else{
-    text_layer_set_text(text_layer, "Sorry");
-    show_points();
+   snprintf(txt,20,"Sorry, it was %d", new_nr);  
+
+   text_layer_set_text(text_layer, txt);
+   show_points();
     points=0;
   }
   last=new_nr;
@@ -80,6 +90,14 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
   
+  bg_image=gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACKGOUND);
+  background_layer=bitmap_layer_create(bounds);
+  
+  bitmap_layer_set_bitmap(background_layer, bg_image);
+  layer_add_child(window_layer, bitmap_layer_get_layer(background_layer));  
+  
+  window_set_background_color(window, GColorClear);
+  
   font14=fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_EAGLE_14));
   font24=fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_EAGLE_24));
   
@@ -95,16 +113,16 @@ static void window_load(Window *window) {
   text_layer_set_font(text_layer, font14);
   layer_add_child(window_layer, text_layer_get_layer(text_layer));
   
-  last_nr_layer=text_layer_create(GRect(0,10,bounds.size.w,30));
+  last_nr_layer=text_layer_create(GRect(0,20,110,30));
   text_layer_set_text(last_nr_layer, txt);
-  text_layer_set_text_alignment(last_nr_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(last_nr_layer, GTextAlignmentLeft);
   text_layer_set_font(last_nr_layer, font24);
   layer_add_child(window_layer, text_layer_get_layer(last_nr_layer));
   
   
-  points_layer=text_layer_create(GRect(0,100,bounds.size.w,20));
+  points_layer=text_layer_create(GRect(20,100,bounds.size.w,20));
   text_layer_set_text(points_layer, "0");
-  text_layer_set_text_alignment(points_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(points_layer, GTextAlignmentLeft);
   text_layer_set_font(points_layer, font14);
   layer_add_child(window_layer, text_layer_get_layer(points_layer));
   
@@ -116,6 +134,8 @@ static void window_unload(Window *window) {
   text_layer_destroy(text_layer);
   fonts_unload_custom_font(font14);
   fonts_unload_custom_font(font24);
+  gbitmap_destroy(bg_image);
+  bitmap_layer_destroy(background_layer);
 }
 
 static void init(void) {

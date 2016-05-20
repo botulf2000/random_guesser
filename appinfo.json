@@ -10,6 +10,12 @@
     "resources": {
         "media": [
             {
+                "file": "images/gissabild.png",
+                "name": "IMAGE_BACKGOUND",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
                 "file": "fonts/EagleLake-Regular.ttf",
                 "name": "FONT_EAGLE_24",
                 "targetPlatforms": null,
