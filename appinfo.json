@@ -1,0 +1,33 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "botulf@gmail.com",
+    "enableMultiJS": true,
+    "longName": "Random_guesser",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/EagleLake-Regular.ttf",
+                "name": "FONT_EAGLE_24",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "file": "fonts/EagleLake-Regular.ttf",
+                "name": "FONT_EAGLE_14",
+                "targetPlatforms": null,
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Random_guesser",
+    "uuid": "6fbdaf85-3b18-4f6b-aac0-8c90fabd74ec",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
