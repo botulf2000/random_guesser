@@ -19,7 +19,7 @@ static int get_next()
 static void show_points()
 {
   static char txt[20];
-  snprintf(txt,20,"Points %d", points);  
+  snprintf(txt,20,"Points: %d", points);  
   
   text_layer_set_text(points_layer, txt);
 }
@@ -27,7 +27,7 @@ static void show_points()
 static void show_last()
 {
   static char txt[20];
-  snprintf(txt,20,"Last %d", last);
+  snprintf(txt,20,"Last: %d", last);
     
   text_layer_set_text(last_nr_layer, txt);
 }
@@ -105,7 +105,7 @@ static void window_load(Window *window) {
   last=rand()%10+1;
   points=0;
   static char txt[20];
-  snprintf(txt,20,"Last %d", last);
+  snprintf(txt,20,"Last: %d", last);
   
   text_layer = text_layer_create(GRect(0, 72, bounds.size.w, 20));
   text_layer_set_text(text_layer, "Higher or lower?");
@@ -113,15 +113,15 @@ static void window_load(Window *window) {
   text_layer_set_font(text_layer, font14);
   layer_add_child(window_layer, text_layer_get_layer(text_layer));
   
-  last_nr_layer=text_layer_create(GRect(0,20,110,30));
+  last_nr_layer=text_layer_create(GRect(20,30,110,30));
   text_layer_set_text(last_nr_layer, txt);
   text_layer_set_text_alignment(last_nr_layer, GTextAlignmentLeft);
   text_layer_set_font(last_nr_layer, font24);
   layer_add_child(window_layer, text_layer_get_layer(last_nr_layer));
   
   
-  points_layer=text_layer_create(GRect(20,100,bounds.size.w,20));
-  text_layer_set_text(points_layer, "0");
+  points_layer=text_layer_create(GRect(30,100,bounds.size.w,20));
+  text_layer_set_text(points_layer, "Points: 0");
   text_layer_set_text_alignment(points_layer, GTextAlignmentLeft);
   text_layer_set_font(points_layer, font14);
   layer_add_child(window_layer, text_layer_get_layer(points_layer));

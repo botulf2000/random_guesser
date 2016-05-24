@@ -5,7 +5,7 @@
     ],
     "companyName": "botulf@gmail.com",
     "enableMultiJS": true,
-    "longName": "Random_guesser",
+    "longName": "Higher or Lower",
     "projectType": "native",
     "resources": {
         "media": [
@@ -30,8 +30,13 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "Random_guesser",
-    "uuid": "6fbdaf85-3b18-4f6b-aac0-8c90fabd74ec",
+    "shortName": "High/Low",
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk"
+    ],
+    "uuid": "0f826173-09b7-42df-ba25-8941206cd889",
     "versionLabel": "1.0",
     "watchapp": {
         "watchface": false
